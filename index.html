@@ -257,7 +257,12 @@ async function fetchData() {
 
                         const card = document.createElement('div');
                         card.className = 'service-item';
-                        card.onclick = () => selectService(card, `${item.nama} (Rp ${finalPrice.toLocaleString()})`);
+                        // Ganti bagian card.onclick di dalam fetchData menjadi seperti ini:
+card.onclick = () => {
+    const detailLengkap = `*${item.nama}* ${subLayanan ? `(_${subLayanan}_)` : ''} ${labelPromo ? `[${labelPromo}]` : ''} - Rp ${finalPrice.toLocaleString()}`;
+    selectService(card, detailLengkap);
+};
+
                         
                         card.innerHTML = `
                             <div style="flex:1; padding-right: 10px; display: flex; flex-direction: column; justify-content: center;">
@@ -298,10 +303,30 @@ function sendBooking() {
     const plat = document.getElementById('plat-nomor').value;
     const date = document.getElementById('book-date').value;
     const time = document.getElementById('book-time').value;
-    if(!name || !plat || !date || !time || selectedServices.length === 0) { alert("Mohon lengkapi data!"); return; }
-    const pesan = `*BOOKING AUTOCLEAN*\n*Nama:* ${name}\n*Unit:* ${vehicleText}\n*Plat:* ${plat.toUpperCase()}\n*Jadwal:* ${date} @ ${time}\n*Layanan:*\n${selectedServices.join('\n')}`;
+
+    if(!name || !plat || !date || !time || selectedServices.length === 0) { 
+        alert("Mohon lengkapi data!"); 
+        return; 
+    }
+
+    const daftarLayanan = selectedServices.join('\n');
+
+    const pesan = `*BOOKING AUTOCLEAN*
+---------------------------
+*Nama:* ${name}
+*Unit:* ${vehicleText}
+*Plat:* ${plat.toUpperCase()}
+*Jadwal:* ${date} @ ${time}
+
+*Layanan & Promo:*
+${daftarLayanan}
+
+_Mohon konfirmasi ketersediaan slot, terima kasih._`;
+
     window.open(`https://wa.me/${CONFIG.WA_PHONE}?text=${encodeURIComponent(pesan)}`, '_blank');
 }
+
+
 
 // Slideshow Hero
 let current = 0;
