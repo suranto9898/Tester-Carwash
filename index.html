@@ -3,444 +3,412 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AutoClean Residence | Booking System</title>
+    <title>AutoClean Carwash | Booking Online</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --res-dark: #1a1a2e;
-            --res-blue: #0f3460;
-            --res-gold: #b8860b;
-            --res-promo: #e11d48;
-            --res-bg: #f8fafc;
-            --res-success: #10b981;
+            --cw-blue: #0077b6;
+            --cw-cyan: #00b4d8;
+            --cw-dark: #03045e;
+            --cw-orange: #fb8500;
+            --bs-white: #f8f9fa;
         }
-        
-        body { font-family: 'Poppins', sans-serif; background: var(--res-bg); margin: 0; padding-bottom: 40px; color: #334155; }
-        
-        /* Top Bar */
-        .top-info-bar { background: #000; color: #fff; font-size: 11px; padding: 8px 0; display: flex; flex-direction: column; gap: 2px; }
-        .realtime-clock { font-weight: 700; color: var(--res-gold); text-align: center; letter-spacing: 1px; }
-        .marquee-container { overflow: hidden; white-space: nowrap; }
-        .marquee-text { display: inline-block; padding-left: 100%; animation: marquee 20s linear infinite; font-weight: 400; color: #e2e8f0; }
-        @keyframes marquee { 0% { transform: translate(0, 0); } 100% { transform: translate(-100%, 0); } }
 
-        /* Header */
-        .header-box { background: var(--res-dark); padding: 50px 20px; text-align: center; color: white; border-bottom: 4px solid var(--res-gold); }
-        .logo-container { width: 80px; height: 80px; background: #fff; border-radius: 50%; margin: 0 auto 15px; border: 3px solid var(--res-gold); display: flex; align-items: center; justify-content: center; overflow: hidden; }
-        .logo-container img { width: 100%; height: 100%; object-fit: cover; }
-        .welcome-text { font-size: 13px; font-weight: 300; max-width: 300px; margin: 15px auto 0; line-height: 1.6; opacity: 0.9; }
+        body { 
+            font-family: 'Poppins', sans-serif; 
+            background: linear-gradient(rgba(248, 249, 250, 0.8), rgba(248, 249, 250, 0.8)), url('background.jpg'); 
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
+            margin: 0; 
+            padding-bottom: 50px; 
+            color: #333; 
+            overflow-x: hidden; 
+        }
 
-        /* Facilities */
-        .facility-bar { display: flex; justify-content: center; gap: 20px; margin-top: 20px; }
-        .fac-item { display: flex; flex-direction: column; align-items: center; gap: 5px; color: var(--res-gold); }
-        .fac-item i { font-size: 18px; }
-        .fac-item span { font-size: 9px; font-weight: 600; text-transform: uppercase; color: #e2e8f0; letter-spacing: 1px; }
+        /* Hero Section */
+        .slideshow-container { width: 100%; height: 380px; position: relative; overflow: hidden; background: #000; }
+        .slideshow-container img.bg-slide { width: 100%; height: 100%; object-fit: cover; position: absolute; opacity: 0; transition: opacity 1.2s; z-index: 1; }
+        .slideshow-container img.bg-slide.active { opacity: 0.5; }
+        .slideshow-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to bottom, transparent, rgba(3,4,94,0.9)); z-index: 2; }
 
-        /* Main Content */
-        .main-container { max-width: 450px; margin: -30px auto 0; padding: 0 15px; position: relative; z-index: 10; }
-        .dash-row { display: flex; gap: 10px; margin-bottom: 15px; }
-        .dash-card { flex: 1; background: white; padding: 12px; border-radius: 14px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.06); }
-        .dash-card b { display: block; font-size: 18px; color: var(--res-dark); }
-        .dash-card span { font-size: 9px; font-weight: 800; color: #94a3b8; text-transform: uppercase; }
-
-/* Container Utama */
-.slideshow-container {
-    max-width: 100%;
-    position: relative;
-    margin: 20px auto;
-    border-radius: 20px;
-    overflow: hidden;
-    height: 250px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-}
-
-.mySlides { display: none; height: 100%; }
-.mySlides img { width: 100%; height: 100%; object-fit: cover; }
-
-/* Tombol Manual Panah */
-.prev, .next {
-    cursor: pointer;
-    position: absolute;
-    top: 50%;
-    width: auto;
-    padding: 16px;
-    margin-top: -22px;
-    color: white;
-    font-weight: bold;
-    font-size: 18px;
-    transition: 0.6s ease;
-    border-radius: 0 3px 3px 0;
-    user-select: none;
-    background-color: rgba(0,0,0,0.3);
-}
-.next { right: 0; border-radius: 3px 0 0 3px; }
-.prev:hover, .next:hover { background-color: rgba(0,0,0,0.8); }
-
-/* Titik Indikator (Dots) */
-.dots-container {
-    text-align: center;
-    position: absolute;
-    bottom: 15px;
-    width: 100%;
-}
-.dot {
-    cursor: pointer;
-    height: 8px;
-    width: 8px;
-    margin: 0 4px;
-    background-color: rgba(255,255,255,0.5);
-    border-radius: 50%;
-    display: inline-block;
-    transition: background-color 0.6s ease;
-}
-.dot.active { background-color: var(--res-gold); width: 20px; border-radius: 5px; }
-
-
-.social-media {
+.disclaimer-card {
+    background: #fff9f0; /* Oranye sangat muda agar kontras tapi lembut */
+    border: 1px solid #ffe8cc;
+    border-radius: 12px;
+    padding: 15px;
+    margin: 15px 0;
     display: flex;
-    justify-content: center;
-    gap: 20px;
-    margin-top: -15px; /* Menempel sedikit ke footer */
-    margin-bottom: 20px;
+    gap: 12px;
+    align-items: flex-start;
 }
 
-.social-item {
-    color: #94a3b8; /* Warna abu-abu default */
-    font-size: 20px;
-    transition: 0.3s;
-    text-decoration: none;
+.disclaimer-card i {
+    color: var(--cw-orange);
+    font-size: 18px;
+    margin-top: 2px;
 }
 
-/* Warna saat ikon disentuh (hover) */
-.social-item:hover {
-    color: var(--res-gold);
-    transform: translateY(-3px);
+.disclaimer-text {
+    font-size: 11px;
+    line-height: 1.6;
+    color: #666;
+}
+
+.disclaimer-text strong {
+    color: var(--cw-dark);
+    display: block;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 
-        /* Tabs & Form */
-        .tabs { display: flex; gap: 8px; margin-bottom: 15px; }
-        .tab-link { flex: 1; background: white; border: 1.5px solid #e2e8f0; padding: 12px; border-radius: 12px; font-size: 10px; font-weight: 800; cursor: pointer; text-align: center; color: #64748b; transition: 0.3s; }
-        .tab-link.active { background: var(--res-blue); color: white; border-color: var(--res-blue); }
-        .tab-link.promo-active { background: var(--res-promo); color: white; border-color: var(--res-promo); animation: pulse-promo 2s infinite; }
-        @keyframes pulse-promo { 0% { opacity: 1; } 50% { opacity: 0.8; } 100% { opacity: 1; } }
+        /* Jam Melayang */
+        #realtime-clock { 
+            position: absolute; top: 20px; left: 0; right: 0; margin: auto; width: fit-content; z-index: 99;
+            font-size: 13px; font-weight: 700; color: var(--cw-cyan); text-transform: uppercase; letter-spacing: 2px; 
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8); background: rgba(0,0,0,0.4); padding: 5px 15px; border-radius: 30px; backdrop-filter: blur(5px);
+        }
 
-        .form-card { background: white; padding: 22px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.06); margin-bottom: 20px; }
-        input { width: 100%; padding: 15px; border-radius: 12px; border: 1.5px solid #e2e8f0; margin-bottom: 15px; box-sizing: border-box; font-size: 14px; outline: none; font-family: inherit; }
-
-        /* Room Items */
-        .room-item { background: #fff; border: 1.5px solid #f1f5f9; border-radius: 16px; padding: 20px 16px 16px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; margin-bottom: 12px; position: relative; overflow: hidden; transition: 0.2s; border-left: 5px solid #eee; }
-        .room-item.selected { border-color: var(--res-gold); background: #fffdf5; border-left-color: var(--res-gold); transform: translateY(-2px); box-shadow: 0 5px 15px rgba(184, 134, 11, 0.1); }
-        .item-terisi { opacity: 0.5; filter: grayscale(1); cursor: not-allowed !important; }
-        .item-kosong { border-left-color: var(--res-success); }
-        .promo-tag-label { position: absolute; top: 0; left: 0; background: var(--res-promo); color: white; font-size: 7px; font-weight: 900; padding: 3px 10px; border-bottom-right-radius: 10px; text-transform: uppercase; }
-        .price-new { font-weight: 900; color: var(--res-gold); font-size: 16px; display: block; }
-        .price-old { font-size: 10px; color: #94a3b8; text-decoration: line-through; display: block; }
-        .badge { font-size: 8px; padding: 3px 8px; border-radius: 6px; font-weight: 800; margin-top: 6px; display: inline-block; text-transform: uppercase; }
-        .badge-kosong { background: #ecfdf5; color: #059669; }
-        .badge-terisi { background: #fef2f2; color: #dc2626; }
+        .header-content { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 10; color: white; text-align: center; padding-top: 40px; }
+        .logo-bisnis { width: 85px; height: 85px; object-fit: cover; border-radius: 18px; border: 3px solid var(--cw-cyan); background: white; margin-bottom: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
         
-        .btn-wa { background: linear-gradient(135deg, var(--res-blue), var(--res-dark)); color: white; width: 100%; padding: 18px; border: none; border-radius: 16px; font-weight: 800; font-size: 14px; cursor: pointer; text-transform: uppercase; box-shadow: 0 8px 20px rgba(15, 52, 96, 0.2); }
+        .status-badge { padding: 6px 14px; border-radius: 20px; font-size: 10px; font-weight: 800; margin-top: 5px; }
+        .status-open { background: #2ecc71; color: white; }
+        .status-closed { background: #e63946; color: white; }
 
-        /* Maps & Disclaimer */
-        .maps-card { background: white; padding: 15px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.06); margin-bottom: 20px; }
-        .maps-card iframe { width: 100%; height: 250px; border: none; border-radius: 12px; }
-        .disclaimer-container { padding: 20px; background: #ffffff; border-radius: 16px; border-left: 4px solid var(--res-gold); box-shadow: 0 4px 20px rgba(0,0,0,0.04); margin-bottom: 30px; }
-        .disclaimer-header { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; color: var(--res-gold); font-size: 12px; font-weight: 800; text-transform: uppercase; }
-        .disclaimer-text { font-size: 11px; color: #64748b; line-height: 1.8; margin: 0; }
+        /* Social Medias CSS */
+        .social-medias { margin-top: 15px; display: flex; gap: 12px; justify-content: center; }
+        .social-medias a {
+            color: white !important; font-size: 18px; background: rgba(0, 0, 0, 0.5); width: 38px; height: 38px; 
+            display: flex; align-items: center; justify-content: center; border-radius: 50%; backdrop-filter: blur(5px);
+            transition: 0.3s; text-decoration: none; border: 1.5px solid var(--cw-cyan);
+        }
+        .social-medias a:hover { background: var(--cw-cyan); transform: scale(1.1); box-shadow: 0 0 15px var(--cw-cyan); }
+
+        .main-wrapper { padding: 0 20px; max-width: 480px; margin: -40px auto 0; position: relative; z-index: 35; }
+
+        .info-card, .gallery-card, .form-card, .location-card {
+            background: white; padding: 20px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); margin-bottom: 20px;
+        }
+
+        .info-card { border-left: 5px solid var(--cw-cyan); }
+        .location-card { border-right: 5px solid var(--cw-orange); }
+        .form-card { border-bottom: 5px solid var(--cw-blue); padding: 25px; }
+
+        .info-card h3, .gallery-card h3, .location-card h3 { margin-top: 0; font-size: 16px; color: var(--cw-dark); font-weight: 800; }
         
-        footer { text-align: center; padding: 20px 0 40px; font-size: 10px; color: #94a3b8; letter-spacing: 1.5px; text-transform: uppercase; }
+        /* Mini Features / Facilities */
+        .mini-features { display: flex; flex-wrap: wrap; gap: 8px; border-top: 1px solid #eee; padding-top: 12px; }
+        .mini-features span { 
+            font-size: 10px; font-weight: 700; color: var(--cw-blue); background: #f0faff; padding: 6px 12px; 
+            border-radius: 20px; display: flex; align-items: center; gap: 6px; border: 1px solid rgba(0, 119, 182, 0.1); 
+        }
+        .fa-wifi { color: #2ecc71; }
+        .fa-utensils { color: #e67e22; }
+        .fa-restroom { color: #9b59b6; }
+        .fa-gift { color: #e74c3c; }
+
+        /* Form & Gallery */
+        .form-group { margin-bottom: 18px; }
+        label { display: block; font-size: 11px; font-weight: 800; margin-bottom: 8px; color: var(--cw-blue); text-transform: uppercase; }
+        input, select, .service-trigger { width: 100%; padding: 14px; border: 1.5px solid #eee; border-radius: 12px; font-size: 14px; box-sizing: border-box; background: #fdfdfd; outline: none; }
+        .gallery-container { width: 100%; height: 180px; border-radius: 12px; overflow: hidden; position: relative; border: 2px solid #eee; }
+        .gallery-slide { width: 100%; height: 100%; object-fit: cover; position: absolute; opacity: 0; transition: opacity 1s; z-index: 1; }
+        .gallery-slide.active-gallery { opacity: 1; z-index: 2; }
+        .gallery-dots { position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%); display: flex; gap: 6px; z-index: 10; }
+        .gallery-dot { width: 8px; height: 8px; background: rgba(255, 255, 255, 0.5); border-radius: 50%; cursor: pointer; }
+        .gallery-dot.active-dot { background: white; width: 16px; border-radius: 10px; }
+
+        /* Maps */
+        .address-box { display: flex; gap: 12px; background: #fffcf8; padding: 12px; border-radius: 12px; border: 1px dashed var(--cw-orange); font-size: 12px; }
+        .map-container { width: 100%; height: 180px; border-radius: 15px; overflow: hidden; margin: 15px 0; border: 2px solid #eee; }
+        .btn-maps { display: inline-block; padding: 10px 15px; background: var(--cw-dark); color: white; text-decoration: none; border-radius: 8px; font-size: 11px; font-weight: 700; }
+
+        #service-list-container { display: none; gap: 10px; margin-top: 12px; max-height: 280px; overflow-y: auto; border-top: 1px dashed #eee; padding-top: 15px; }
+        .service-item { background: white; border: 1.2px solid #f0f0f0; border-radius: 14px; padding: 14px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; margin-bottom: 8px; }
+        .service-item.selected { border-color: var(--cw-blue); background: #f0faff; }
+        .btn-confirm { background: linear-gradient(135deg, var(--cw-blue), var(--cw-dark)); color: white; width: 100%; padding: 18px; border: none; border-radius: 14px; font-weight: 800; font-size: 16px; cursor: pointer; box-shadow: 0 8px 20px rgba(3,4,94,0.25); text-transform: uppercase; }
+        footer { text-align: center; padding: 30px 10px; font-size: 10px; color: #bbb; letter-spacing: 1.5px; }
+        .skeleton { height: 75px; background: #f5f5f5; border-radius: 14px; margin-bottom: 10px; animation: pulse 1.5s infinite; }
+        @keyframes pulse { 50% { opacity: 0.4; } }
     </style>
 </head>
 <body>
 
-<div class="top-info-bar">
-    <div class="realtime-clock" id="jam-digital">00:00:00 WIB</div>
-    <div class="marquee-container">
-        <div class="marquee-text">Selamat Datang di AutoClean Residence - Hunian Nyaman dan Strategis. Dapatkan Promo Menarik Bulan Ini!</div>
+<div class="slideshow-container">
+    <div id="realtime-clock">Memuat Waktu...</div>
+    <div class="header-content">
+        <img src="logo.jpg" class="logo-bisnis" onerror="this.src='https://via.placeholder.com/100?text=LOGO'">
+        <h1 style="margin:0; font-size:22px; font-weight:800; letter-spacing:1.5px;">AUTOCLEAN</h1>
+        <div id="shop-status" class="status-badge">Checking...</div>
+        
     </div>
+    <div class="slideshow-overlay"></div>
+    <img src="foto1.jpg" class="bg-slide active">
+    <img src="foto2.jpg" class="bg-slide">
+    <img src="foto3.jpg" class="bg-slide">
+    <img src="foto4.jpg" class="bg-slide">
+    <img src="foto5.jpg" class="bg-slide">
 </div>
 
-<div class="header-box">
-    <div class="logo-container"><img src="logo.jpg" alt="Logo" onerror="this.src='https://via.placeholder.com/80?text=LOGO'"></div>
-    <h1>AUTOCLEAN</h1>
-    <p>RESIDENCE & PROPERTY</p>
-    <p class="welcome-text">Hunian kost modern, bersih, dan strategis. Kenyamanan Anda adalah prioritas kami.</p>
-    <div class="facility-bar">
-        <div class="fac-item"><i class="fas fa-wifi"></i><span>Free Wifi</span></div>
-        <div class="fac-item"><i class="fas fa-video"></i><span>CCTV 24H</span></div>
-        <div class="fac-item"><i class="fas fa-parking"></i><span>Parkir Luas</span></div>
-    </div>
-</div>
-
-<div class="main-container">
-    <div class="dash-row">
-        <div class="dash-card"><b><span id="stok-kosong">0</span></b><span>Tersedia</span></div>
-        <div class="dash-card"><b><span id="stok-terisi">0</span></b><span>Terisi</span></div>
-    </div>
-
-    <div class="tabs">
-        <div class="tab-link promo-active" id="tab-promo" onclick="setTab('promo', this)">🔥 PROMO</div>
-        <div class="tab-link" onclick="setTab('budget', this)">💰 < 1 JT</div>
-        <div class="tab-link" onclick="setTab('premium', this)">👑 > 1 JT</div>
+<div class="main-wrapper">
+    <div class="info-card">
+        <h3><i class="fas fa-sparkles"></i> Mengapa AutoClean?</h3>
+        <p>Layanan cuci premium dengan teknologi <strong>Snow Wash</strong>. Sampo khusus aman cat dan perlindungan anti jamur.</p>
+        <div class="mini-features">
+            <span><i class="fas fa-wifi"></i> WiFi Gratis</span>
+            <span><i class="fas fa-utensils"></i> Cafe & Resto</span>
+            <span><i class="fas fa-restroom"></i> Toilet Bersih</span>
+            <span><i class="fas fa-gift"></i> Gratis Minuman</span>
+        </div>
     </div>
 
     <div class="form-card">
-        <input type="text" id="user-name" placeholder="Input Nama Calon Penghuni...">
-        <div id="display-kamar"></div>
-        <button class="btn-wa" onclick="kirimWA()">Pesan Sekarang</button>
+        <div class="form-group">
+            <label>Nama Pemilik</label>
+            <input type="text" id="cust-name" placeholder="Nama Anda">
+        </div>
+        <div class="form-group">
+            <label>Tipe Kendaraan</label>
+            <select id="vehicle-type" onchange="resetAndFetch()">
+                <option value="motor-all"> 🏍️ Sepeda Motor</option>
+                <option value="mobil-small"> 🚗Mobil Small</option>
+                <option value="mobil-medium">🚙Mobil Medium</option>
+                <option value="mobil-large">🚛 Mobil Large</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Nomor Plat</label>
+            <input type="text" id="plat-nomor" placeholder="B 1234 ABC" style="text-transform: uppercase; font-weight:700;">
+        </div>
+        <div class="form-group">
+            <label>Pilih Layanan</label>
+            <div class="service-trigger" onclick="toggleServices()" style="display: flex; justify-content: space-between; align-items: center; cursor: pointer;">
+                <span id="selected-count">Lihat Menu Layanan...</span>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+            <div id="service-list-container"></div>
+        </div>
+        <div class="form-group">
+            <label>Waktu Datang</label>
+            <div style="display: flex; gap: 10px;">
+                <input type="date" id="book-date">
+                <input type="time" id="book-time">
+            </div>
+        </div>
+        <button class="btn-confirm" onclick="sendBooking()">Konfirmasi Booking</button>
     </div>
-   
-<div class="slideshow-container">
-    <div class="mySlides fade"><img src="foto1.jpg" onerror="this.src='https://via.placeholder.com/450x250?text=Foto+1'"></div>
-    <div class="mySlides fade"><img src="foto2.jpg" onerror="this.src='https://via.placeholder.com/450x250?text=Foto+2'"></div>
-    <div class="mySlides fade"><img src="foto3.jpg" onerror="this.src='https://via.placeholder.com/450x250?text=Foto+3'"></div>
-    <div class="mySlides fade"><img src="foto4.jpg" onerror="this.src='https://via.placeholder.com/450x250?text=Foto+4'"></div>
 
-    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-    <a class="next" onclick="plusSlides(1)">&#10095;</a>
-
-    <div class="dots-container">
-        <span class="dot" onclick="currentSlide(1)"></span>
-        <span class="dot" onclick="currentSlide(2)"></span>
-        <span class="dot" onclick="currentSlide(3)"></span>
-        <span class="dot" onclick="currentSlide(4)"></span>
+    <div class="gallery-card">
+        <h3><i class="fas fa-camera-retro" style="color: var(--cw-cyan);"></i> Galeri Hasil Cuci</h3>
+        <div class="gallery-container">
+            <img src="cuci1.jpg" class="gallery-slide active-gallery" onerror="this.src='https://via.placeholder.com/480x180?text=Hasil+Cuci+1'">
+            <img src="cuci2.jpg" class="gallery-slide" onerror="this.src='https://via.placeholder.com/480x180?text=Hasil+Cuci+2'">
+            <img src="cuci3.jpg" class="gallery-slide" onerror="this.src='https://via.placeholder.com/480x180?text=Hasil+Cuci+3'">
+            <img src="cuci4.jpg" class="gallery-slide" onerror="this.src='https://via.placeholder.com/480x180?text=Hasil+Cuci+4'">
+            <div class="gallery-dots" id="gallery-dots-container"></div>
+        </div>
     </div>
-</div>
 
- 
-    <div class="maps-card">
-    <div style="font-weight: 800; font-size: 13px; margin-bottom: 10px; color: var(--res-dark);">
-        <i class="fas fa-map-marker-alt" style="color: var(--res-promo);"></i> LOKASI KAMI
+    <div class="location-card">
+        <h3><i class="fas fa-map-marker-alt" style="color: var(--cw-orange);"></i> Lokasi Workshop</h3>
+        <div class="address-box">
+            <i class="fas fa-directions" style="color: var(--cw-orange);"></i>
+            <div>
+                <strong>AutoClean Carwash Premium</strong><br>
+                Jl. Raya Solo - Ngawi No.07, Grudo, Kec. Ngawi
+            </div>
+        </div>
+        <div class="map-container">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3957.5321526685!2d111.4248972!3d-7.4054725!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7917844a0e3dd5%3A0x5c6d6a70f910f8c7!2sKing%20Gloss%20cuci%20mobil%20%26%20motor!5e0!3m2!1sid!2sid!4v1709440000000!5m2!1sid!2sid" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+        <a href="https://maps.google.com/?cid=6660096457398352071&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="btn-maps">
+            <i class="fas fa-location-arrow"></i> BUKA DI MAPS
+        </a>
     </div>
+
+<div class="social-medias">
+            <a href="https://tiktok.com/@autoclean" target="_blank"><i class="fab fa-tiktok"></i></a>
+            <a href="https://instagram.com/autoclean" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://facebook.com/autoclean" target="_blank"><i class="fab fa-facebook"></i></a>
+        </div>
     
-    <div style="font-size: 11px; color: #64748b; margin-bottom: 15px; line-height: 1.5; background: #f1f5f9; padding: 10px; border-radius: 8px;">
-        <i class="fas fa-info-circle"></i> <b>Alamat:</b><br>
-        Jl. Contoh No. 123, Kelurahan ABC, Kecamatan XYZ, Kota Anda, Kode Pos 12345
-    </div>
-
-    <iframe 
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.0!2d106.0!3d-6.0!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNsKwMDAnMDAuMCJTIDEwNsKwMDAnMDAuMCJF!5e0!3m2!1sid!2sid!4v123456789" 
-        allowfullscreen="" 
-        loading="lazy">
-    </iframe>
-
-    <a href="https://maps.google.com/?q=AutoClean+Residence+Alamat+Anda" target="_blank" style="text-decoration: none;">
-        <button style="width: 100%; background: #fff; border: 1.5px solid var(--res-blue); color: var(--res-blue); padding: 10px; border-radius: 10px; margin-top: 10px; font-size: 11px; font-weight: 700; cursor: pointer;">
-            <i class="fas fa-directions"></i> PETUNJUK JALAN (GOOGLE MAPS)
-        </button>
-    </a>
-</div>
-
-    <div class="disclaimer-container">
-        <div class="disclaimer-header"><i class="fas fa-shield-alt"></i> Kebijakan Reservasi</div>
-          <div class="disclaimer-text">
-    <p> Harap konfirmasi terlebih dahulu sebelum melakukan DP Reservasi.</p>
-    <p> Pembatalan reservasi tidak akan mengembalikan DP yang telah dibayarkan terkecuali pembatalan sepihak dari kami.</p>
-    <p> Harga dapat suatu saat berubah tanpa persetujuan dari pihak manapun terkecuali telah melakukan DP Reservasi </p>
-</div>
-
-        </p>
+    <div class="disclaimer-card">
+    <i class="fas fa-info-circle"></i>
+    <div class="disclaimer-text">
+        <strong>Ketentuan Booking Online</strong>
+        1. Datanglah 10 menit sebelum jadwal untuk verifikasi.<br>
+        2. Keterlambatan lebih dari 15 menit dianggap <b>Batal/Antrean Normal</b>.<br>
+        3. Harga final ditentukan setelah pengecekan kondisi fisik kendaraan oleh tim kami.
     </div>
 </div>
 
-<div class="social-media">
-    <a href="https://facebook.com/username" class="social-item" target="_blank">
-        <i class="fab fa-facebook"></i>
-    </a>
-    <a href="https://instagram.com/username" class="social-item" target="_blank">
-        <i class="fab fa-instagram"></i>
-    </a>
-    <a href="https://tiktok.com/@username" class="social-item" target="_blank">
-        <i class="fab fa-tiktok"></i>
-    </a>
+    <footer>
+        � 2026 AUTOCLEAN CARWASH<br>Premium Vehicle Care & Detailing
+    </footer>
 </div>
-
-
-<footer>AUTOCLEAN PROPERTY MGT © 2026</footer>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
 <script>
-const DATA_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQC0MuW0EI05qjD95UTpRMJyBzKLP_F7hGagplelwhuEtq_wgwTk2IUeu5bR1I5PrXT-TQEizEs5iuu/pub?output=csv";
-const WA_NUMBER = "6285725493220";
+const CONFIG = {
+    CSV_URL: "https://docs.google.com/spreadsheets/d/e/2PACX-1vSn3fTe6ZfwCmRrFnrlBkwse4km3n9-STclg5zyqqdMsfZ7Rdb8WU9AaJR31XuxVnr8hXil146h4CJO/pub?output=csv",
+    WA_PHONE: "6285725493220"
+};
 
-let listKamar = [];
-let tabAktif = 'promo'; 
-let pilihanSaya = "";
+let selectedServices = [];
 
-async function muatData() {
+function updateClock() {
+    const now = new Date();
+    const options = { weekday: 'long', day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit', second: '2-digit' };
+    document.getElementById('realtime-clock').innerText = now.toLocaleDateString('id-ID', options).replace(/\./g, ':');
+}
+setInterval(updateClock, 1000);
+
+async function fetchData() {
+    const container = document.getElementById('service-list-container');
+    const vehicleValue = document.getElementById('vehicle-type').value.split('-');
+    const filterKat = vehicleValue[0].toLowerCase().trim();
+    const filterType = vehicleValue[1].toLowerCase().trim();
+    
+    container.innerHTML = '<div class="skeleton"></div>';
+    
     try {
-        const r = await fetch(DATA_URL);
-        const text = await r.text();
-        Papa.parse(text, {
+        const response = await fetch(CONFIG.CSV_URL);
+        const csvString = await response.text();
+        Papa.parse(csvString, {
             header: true,
             skipEmptyLines: true,
-            complete: (res) => {
-                // Filter agar baris kosong di excel tidak bikin error
-                listKamar = res.data.filter(item => item.nomor);
-                tampilkanKamar();
+            complete: function(results) {
+                container.innerHTML = "";
+                results.data.forEach(item => {
+                    const itemKat = (item.kategori || "").toLowerCase().trim();
+                    const itemType = (item.type || "").toLowerCase().trim();
+                    
+                    if ((itemKat === filterKat || itemKat === "all") && (itemType === filterType || itemType === "all")) {
+                        
+                        const hAsli = parseInt(item.harga) || 0;
+                        const hPromo = parseInt(item.promo) || 0;
+                        const labelPromo = item.promo_tag || ""; 
+                        const subLayanan = item.layanan || ""; 
+                        
+                        const isPromo = hPromo > 0;
+                        const finalPrice = isPromo ? hPromo : hAsli;
+
+                        const card = document.createElement('div');
+                        card.className = 'service-item';
+                        // Ganti bagian card.onclick di dalam fetchData menjadi seperti ini:
+card.onclick = () => {
+    const detailLengkap = `*${item.nama}* ${subLayanan ? `(_${subLayanan}_)` : ''} ${labelPromo ? `[${labelPromo}]` : ''} - Rp ${finalPrice.toLocaleString()}`;
+    selectService(card, detailLengkap);
+};
+
+                        
+                        card.innerHTML = `
+                            <div style="flex:1; padding-right: 10px; display: flex; flex-direction: column; justify-content: center;">
+                                <div class="service-name" style="font-weight:700; color:var(--cw-dark);">${item.nama}</div>
+                                ${subLayanan ? `<div style="font-size:10px; color:#888; margin-top:2px;">${subLayanan}</div>` : ''}
+                            </div>
+                            <div class="price-box" style="text-align: right; min-width: 100px; display: flex; flex-direction: column; align-items: flex-end; justify-content: center;">
+                                ${isPromo ? `<div style="text-decoration: line-through; color: #bbb; font-size: 11px; margin-bottom: -2px;">Rp ${hAsli.toLocaleString()}</div>` : ''}
+                                <div class="new-price" style="font-weight: 800; color: var(--cw-blue); font-size: 15px;">
+                                    Rp ${finalPrice.toLocaleString()}
+                                </div>
+                                ${labelPromo ? `<div style="background:#e63946; color:white; font-size:9px; padding:2px 8px; border-radius:4px; font-weight:800; margin-top:4px; text-transform:uppercase; letter-spacing:0.5px;">${labelPromo}</div>` : ''}
+                            </div>
+                        `;
+                        container.appendChild(card);
+                    }
+                });
             }
         });
     } catch (e) { 
-        document.getElementById('display-kamar').innerHTML = "Gagal memuat data.";
+        console.error(e); 
+        container.innerHTML = "<p style='font-size:12px; color:red; text-align:center;'>Gagal memuat menu.</p>";
     }
 }
 
-function tampilkanKamar() {
-    const box = document.getElementById('display-kamar');
-    box.innerHTML = "";
-    let kosong = 0; let terisi = 0;
+function selectService(el, str) {
+    if (selectedServices.includes(str)) { selectedServices = selectedServices.filter(i => i !== str); el.classList.remove('selected'); } 
+    else { selectedServices.push(str); el.classList.add('selected'); }
+    document.getElementById('selected-count').innerText = selectedServices.length > 0 ? `${selectedServices.length} Layanan Dipilih` : "Lihat Menu Layanan...";
+}
 
-    listKamar.forEach(item => {
-        if(!item.nomor) return;
-        
-        // 1. Definisikan status dan harga
-        const status = (item.status || "").toLowerCase().trim();
-        const isFull = status === "terisi";
-        if(isFull) terisi++; else kosong++;
+function resetAndFetch() { selectedServices = []; document.getElementById('selected-count').innerText = "Lihat Menu Layanan..."; fetchData(); }
+function toggleServices() { const c = document.getElementById('service-list-container'); c.style.display = (c.style.display === "none" || c.style.display === "") ? "grid" : "none"; }
 
-        const hAsli = parseInt(item.harga) || 0;
-        const hPromo = parseInt(item.promo) || 0;
-        const hFinal = hPromo > 0 ? hPromo : hAsli;
-        
-        // 2. Definisikan Tag Promo (Ambil dari kolom promo_tag)
-        const tagKustom = item.promo_tag || "PROMO KHUSUS"; 
+function sendBooking() {
+    const name = document.getElementById('cust-name').value;
+    const vehicleText = document.getElementById('vehicle-type').options[document.getElementById('vehicle-type').selectedIndex].text;
+    const plat = document.getElementById('plat-nomor').value;
+    const date = document.getElementById('book-date').value;
+    const time = document.getElementById('book-time').value;
 
-        // 3. Filter Tab
-        if(tabAktif === 'promo' && hPromo === 0) return;
-        if(tabAktif === 'budget' && hAsli >= 1000000) return;
-        if(tabAktif === 'premium' && hAsli < 1000000) return;
+    if(!name || !plat || !date || !time || selectedServices.length === 0) { 
+        alert("Mohon lengkapi data!"); 
+        return; 
+    }
 
-        const el = document.createElement('div');
-        el.className = `room-item ${isFull ? 'item-terisi' : 'item-kosong'}`;
+    const daftarLayanan = selectedServices.join('\n');
 
-        if(!isFull) {
-            el.onclick = () => {
-                pilihanSaya = {
-                    nomor: item.nomor,
-                    fasilitas: item.fasilitas,
-                    hargaAsli: hAsli,
-                    hargaFinal: hFinal,
-                    promoTag: hPromo > 0 ? tagKustom : "Harga Normal"
-                };
-                document.querySelectorAll('.room-item').forEach(i => i.classList.remove('selected'));
-                el.classList.add('selected');
-            };
-        }
+    const pesan = `*BOOKING AUTOCLEAN*
+---------------------------
+*Nama:* ${name}
+*Unit:* ${vehicleText}
+*Plat:* ${plat.toUpperCase()}
+*Jadwal:* ${date} @ ${time}
 
-        // 4. Render HTML (Layanan sudah dihapus)
-        el.innerHTML = `
-            ${hPromo > 0 && !isFull ? `<div class="promo-tag-label">${tagKustom}</div>` : ''}
-            
-            <div style="flex:1">
-                <div style="font-weight:800; font-size:15px; color:var(--res-dark)">Unit No. ${item.nomor}</div>
-                <div style="font-size:10px; color:#64748b; margin-top:2px;">${item.fasilitas}</div>
-                <div class="badge badge-${status}">${isFull ? '🚫 Full' : '✅ Ready'}</div>
-            </div>
+*Layanan & Promo:*
+${selectedServices.join('\n')}
 
-            <div style="text-align:right">
-                ${hPromo > 0 && !isFull ? `<span class="price-old">Rp ${hAsli.toLocaleString()}</span>` : ''}
-                <span class="price-new">Rp ${hFinal.toLocaleString()}</span>
-                <span style="font-size:8px; color:#94a3b8; font-weight:700">/ Bulan</span>
-            </div>
-        `;
-        box.appendChild(el);
+---------------------------
+_NB: Datang tepat waktu. Terlambat 15 menit = Batal. Harga final dicek di lokasi._`;
+
+
+    window.open(`https://wa.me/${CONFIG.WA_PHONE}?text=${encodeURIComponent(pesan)}`, '_blank');
+}
+
+
+
+// Slideshow Hero
+let current = 0;
+setInterval(() => {
+    const s = document.querySelectorAll('.bg-slide');
+    if(s.length) { s[current].classList.remove('active'); current = (current + 1) % s.length; s[current].classList.add('active'); }
+}, 4500);
+
+// Gallery Logic
+function initGallery() {
+    const slides = document.querySelectorAll('.gallery-slide');
+    const dotsContainer = document.getElementById('gallery-dots-container');
+    if (!slides.length) return;
+    slides.forEach((_, i) => {
+        const dot = document.createElement('div');
+        dot.className = `gallery-dot ${i === 0 ? 'active-dot' : ''}`;
+        dot.onclick = () => { currentGal = i; updateGal(); };
+        dotsContainer.appendChild(dot);
     });
-
-    document.getElementById('stok-kosong').innerText = kosong;
-    document.getElementById('stok-terisi').innerText = terisi;
-}
-
-function setTab(kategori, tombol) {
-    tabAktif = kategori;
-    document.querySelectorAll('.tab-link').forEach(t => t.classList.remove('active', 'promo-active'));
-    tombol.classList.add(kategori === 'promo' ? 'promo-active' : 'active');
-    tampilkanKamar();
-}
-
-// Slideshow Logic
-let slideIndex = 1;
-let slideTimer;
-
-function plusSlides(n) {
-    clearTimeout(slideTimer);
-    showSlides(slideIndex += n);
-    autoSlides();
-}
-
-function currentSlide(n) {
-    clearTimeout(slideTimer);
-    showSlides(slideIndex = n);
-    autoSlides();
-}
-
-function showSlides(n) {
-    let slides = document.getElementsByClassName("mySlides");
-    let dots = document.getElementsByClassName("dot");
-    if (slides.length === 0) return;
-    
-    if (n > slides.length) {slideIndex = 1}    
-    if (n < 1) {slideIndex = slides.length}
-    
-    for (let i = 0; i < slides.length; i++) {
-        slides[i].style.display = "none";  
+    let currentGal = 0;
+    function updateGal() {
+        const dots = document.querySelectorAll('.gallery-dot');
+        slides.forEach(s => s.classList.remove('active-gallery'));
+        dots.forEach(d => d.classList.remove('active-dot'));
+        slides[currentGal].classList.add('active-gallery');
+        dots[currentGal].classList.add('active-dot');
     }
-    for (let i = 0; i < dots.length; i++) {
-        dots[i].className = dots[i].className.replace(" active", "");
-    }
-    
-    if(slides[slideIndex-1]) slides[slideIndex-1].style.display = "block";  
-    if(dots[slideIndex-1]) dots[slideIndex-1].className += " active";
+    setInterval(() => { currentGal = (currentGal + 1) % slides.length; updateGal(); }, 3500);
 }
 
-function autoSlides() {
-    slideTimer = setTimeout(function() {
-        slideIndex++;
-        showSlides(slideIndex);
-        autoSlides();
-    }, 4000);
-}
+const hr = new Date().getHours();
+const elStatus = document.getElementById('shop-status');
+if(hr >= 8 && hr < 20) { elStatus.innerHTML = ' SEKARANG BUKA'; elStatus.className = "status-badge status-open"; }
+else { elStatus.innerHTML = ' SEKARANG TUTUP'; elStatus.className = "status-badge status-closed"; }
 
-function updateJam() {
-    const clockEl = document.getElementById('jam-digital');
-    if(clockEl) clockEl.innerText = new Date().toLocaleTimeString('id-ID') + " WIB";
-}
-
-function kirimWA() {
-    const nama = document.getElementById('user-name').value;
-    if(!nama) { alert("Harap masukkan nama Anda!"); return; }
-    if(!pilihanSaya) { alert("Silakan pilih unit kamar terlebih dahulu!"); return; }
-
-    const formatRupiah = (angka) => "Rp " + angka.toLocaleString('id-ID');
-
-    const teks = 
-`*RESERVASI UNIT - AUTOCLEAN RESIDENCE*
---------------------------------------------------
-👤 *DATA CALON PENGHUNI*
-• Nama: *${nama.toUpperCase()}*
-• Tanggal: ${new Date().toLocaleDateString('id-ID')}
-
-🏠 *DETAIL UNIT PILIHAN*
-• Unit Nomor: *${pilihanSaya.nomor}*
-• Fasilitas: ${pilihanSaya.fasilitas}
-
-🎁 *INFO HARGA & PROMO*
-• Status: *${pilihanSaya.promoTag}*
-• Harga Normal: ${formatRupiah(pilihanSaya.hargaAsli)}
-• *Harga Final: ${formatRupiah(pilihanSaya.hargaFinal)} /bulan*
-
---------------------------------------------------
-_"Saya tertarik dengan unit di atas. Mohon info ketersediaan selanjutnya. Terima kasih."_`;
-
-    window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(teks)}`, '_blank');
-}
-
-// Jalankan fungsi
-updateJam();
-setInterval(updateJam, 1000);
-muatData();
-autoSlides();
+updateClock();
+fetchData();
+initGallery();
 </script>
 </body>
 </html>
