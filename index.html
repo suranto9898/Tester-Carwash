@@ -26,138 +26,18 @@
             color: #333; 
             overflow-x: hidden; 
         }
-       
-   .social-medias {
-    margin-top: 15px;
-    display: flex;
-    gap: 15px;
-    justify-content: center;
-    position: relative; /* Penting agar muncul di atas overlay */
-    z-index: 100;       /* Angka tinggi agar tidak tertutup gambar */
-}
 
-.social-medias a {
-    color: white !important; /* Memaksa warna putih */
-    font-size: 20px;
-    background: rgba(0, 0, 0, 0.5); /* Background hitam transparan agar ikon putih terlihat jelas */
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    backdrop-filter: blur(5px);
-    transition: 0.3s;
-    text-decoration: none;
-    border: 1.5px solid var(--cw-cyan); /* Garis tepi biru cyan agar mencolok */
-    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-}
-
-.social-medias a:hover {
-    background: var(--cw-cyan);
-    transform: scale(1.1);
-    box-shadow: 0 0 15px var(--cw-cyan);
-}
-    
-    /* Lokasi Section CSS */
-.location-card {
-    background: white;
-    padding: 20px;
-    border-radius: 20px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
-    margin-bottom: 20px;
-    border-right: 5px solid var(--cw-orange); /* Aksen warna oranye agar beda dengan info card */
-}
-
-.location-card h3 { 
-    margin-top: 0; 
-    font-size: 16px; 
-    color: var(--cw-dark); 
-    font-weight: 800; 
-    margin-bottom: 12px;
-}
-
-.address-box {
-    display: flex;
-    gap: 12px;
-    align-items: flex-start;
-    background: #fffcf8;
-    padding: 12px;
-    border-radius: 12px;
-    border: 1px dashed var(--cw-orange);
-}
-
-.address-box i {
-    color: var(--cw-orange);
-    font-size: 18px;
-    margin-top: 3px;
-}
-
-.address-text {
-    font-size: 12px;
-    line-height: 1.6;
-    color: #444;
-}
-
-.btn-maps {
-    display: inline-block;
-    margin-top: 12px;
-    padding: 8px 15px;
-    background: var(--cw-dark);
-    color: white;
-    text-decoration: none;
-    border-radius: 8px;
-    font-size: 11px;
-    font-weight: 700;
-    transition: 0.3s;
-}
-
-.btn-maps:hover {
-    background: var(--cw-blue);
-    transform: translateX(5px);
-}
-
-.map-container {
-    width: 100%;
-    height: 200px;
-    border-radius: 15px;
-    overflow: hidden;
-    margin-top: 15px;
-    border: 2px solid #eee;
-}
-
-.map-container iframe {
-    width: 100%;
-    height: 100%;
-    border: 0;
-}
-
-       
         /* Hero Section */
-        .slideshow-container { width: 100%; height: 350px; position: relative; overflow: hidden; background: #000; }
+        .slideshow-container { width: 100%; height: 380px; position: relative; overflow: hidden; background: #000; }
         .slideshow-container img.bg-slide { width: 100%; height: 100%; object-fit: cover; position: absolute; opacity: 0; transition: opacity 1.2s; z-index: 1; }
         .slideshow-container img.bg-slide.active { opacity: 0.5; }
         .slideshow-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to bottom, transparent, rgba(3,4,94,0.9)); z-index: 2; }
 
-        /* Jam Melayang Paling Atas */
+        /* Jam Melayang */
         #realtime-clock { 
-            position: absolute; 
-            top: 20px; 
-            left: 0;
-            right: 0;
-            margin: auto;
-            width: fit-content;
-            z-index: 99;
-            font-size: 13px; 
-            font-weight: 700; 
-            color: var(--cw-cyan); 
-            text-transform: uppercase; 
-            letter-spacing: 2px; 
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
-            background: rgba(0,0,0,0.4); 
-            padding: 5px 15px;
-            border-radius: 30px;
-            backdrop-filter: blur(5px);
+            position: absolute; top: 20px; left: 0; right: 0; margin: auto; width: fit-content; z-index: 99;
+            font-size: 13px; font-weight: 700; color: var(--cw-cyan); text-transform: uppercase; letter-spacing: 2px; 
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8); background: rgba(0,0,0,0.4); padding: 5px 15px; border-radius: 30px; backdrop-filter: blur(5px);
         }
 
         .header-content { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 10; color: white; text-align: center; padding-top: 40px; }
@@ -167,42 +47,57 @@
         .status-open { background: #2ecc71; color: white; }
         .status-closed { background: #e63946; color: white; }
 
+        /* Social Medias CSS */
+        .social-medias { margin-top: 15px; display: flex; gap: 12px; justify-content: center; }
+        .social-medias a {
+            color: white !important; font-size: 18px; background: rgba(0, 0, 0, 0.5); width: 38px; height: 38px; 
+            display: flex; align-items: center; justify-content: center; border-radius: 50%; backdrop-filter: blur(5px);
+            transition: 0.3s; text-decoration: none; border: 1.5px solid var(--cw-cyan);
+        }
+        .social-medias a:hover { background: var(--cw-cyan); transform: scale(1.1); box-shadow: 0 0 15px var(--cw-cyan); }
+
         .main-wrapper { padding: 0 20px; max-width: 480px; margin: -40px auto 0; position: relative; z-index: 35; }
 
-        .info-card, .gallery-card, .form-card {
-            background: white; padding: 20px; border-radius: 20px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.05); margin-bottom: 20px;
+        .info-card, .gallery-card, .form-card, .location-card {
+            background: white; padding: 20px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); margin-bottom: 20px;
         }
 
         .info-card { border-left: 5px solid var(--cw-cyan); }
+        .location-card { border-right: 5px solid var(--cw-orange); }
         .form-card { border-bottom: 5px solid var(--cw-blue); padding: 25px; }
 
-        .info-card h3, .gallery-card h3 { margin-top: 0; font-size: 16px; color: var(--cw-dark); font-weight: 800; }
-        .info-card p { font-size: 12px; line-height: 1.6; color: #666; margin-bottom: 15px; }
-
+        .info-card h3, .gallery-card h3, .location-card h3 { margin-top: 0; font-size: 16px; color: var(--cw-dark); font-weight: 800; }
+        
+        /* Mini Features / Facilities */
         .mini-features { display: flex; flex-wrap: wrap; gap: 8px; border-top: 1px solid #eee; padding-top: 12px; }
-        .mini-features span { font-size: 9px; font-weight: 700; color: var(--cw-blue); background: #f0faff; padding: 4px 10px; border-radius: 20px; }
+        .mini-features span { 
+            font-size: 10px; font-weight: 700; color: var(--cw-blue); background: #f0faff; padding: 6px 12px; 
+            border-radius: 20px; display: flex; align-items: center; gap: 6px; border: 1px solid rgba(0, 119, 182, 0.1); 
+        }
+        .fa-wifi { color: #2ecc71; }
+        .fa-utensils { color: #e67e22; }
+        .fa-restroom { color: #9b59b6; }
+        .fa-gift { color: #e74c3c; }
 
+        /* Form & Gallery */
         .form-group { margin-bottom: 18px; }
         label { display: block; font-size: 11px; font-weight: 800; margin-bottom: 8px; color: var(--cw-blue); text-transform: uppercase; }
         input, select, .service-trigger { width: 100%; padding: 14px; border: 1.5px solid #eee; border-radius: 12px; font-size: 14px; box-sizing: border-box; background: #fdfdfd; outline: none; }
-
-        /* Gallery CSS */
         .gallery-container { width: 100%; height: 180px; border-radius: 12px; overflow: hidden; position: relative; border: 2px solid #eee; }
-        .gallery-slide { width: 100%; height: 100%; object-fit: cover; position: absolute; opacity: 0; transition: opacity 1s ease-in-out; z-index: 1; }
+        .gallery-slide { width: 100%; height: 100%; object-fit: cover; position: absolute; opacity: 0; transition: opacity 1s; z-index: 1; }
         .gallery-slide.active-gallery { opacity: 1; z-index: 2; }
         .gallery-dots { position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%); display: flex; gap: 6px; z-index: 10; }
         .gallery-dot { width: 8px; height: 8px; background: rgba(255, 255, 255, 0.5); border-radius: 50%; cursor: pointer; }
         .gallery-dot.active-dot { background: white; width: 16px; border-radius: 10px; }
 
-        #service-list-container { display: none; gap: 10px; margin-top: 12px; max-height: 280px; overflow-y: auto; border-top: 1px dashed #eee; padding-top: 15px; }
-        .service-item { background: white; border: 1.2px solid #f0f0f0; border-radius: 14px; padding: 14px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; transition: 0.2s; margin-bottom: 8px; }
-        .service-item.selected { border-color: var(--cw-blue); background: #f0faff; }
-        .service-name { font-size: 14px; font-weight: 700; color: var(--cw-dark); }
-        .promo-tag-badge { background: var(--cw-orange); color: white; font-size: 9px; padding: 2px 8px; border-radius: 6px; font-weight: 700; margin-top: 6px; display: inline-block; }
-        .price-box { text-align: right; min-width: 90px; }
-        .new-price { font-weight: 800; color: var(--cw-blue); font-size: 15px; }
+        /* Maps */
+        .address-box { display: flex; gap: 12px; background: #fffcf8; padding: 12px; border-radius: 12px; border: 1px dashed var(--cw-orange); font-size: 12px; }
+        .map-container { width: 100%; height: 180px; border-radius: 15px; overflow: hidden; margin: 15px 0; border: 2px solid #eee; }
+        .btn-maps { display: inline-block; padding: 10px 15px; background: var(--cw-dark); color: white; text-decoration: none; border-radius: 8px; font-size: 11px; font-weight: 700; }
 
+        #service-list-container { display: none; gap: 10px; margin-top: 12px; max-height: 280px; overflow-y: auto; border-top: 1px dashed #eee; padding-top: 15px; }
+        .service-item { background: white; border: 1.2px solid #f0f0f0; border-radius: 14px; padding: 14px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; margin-bottom: 8px; }
+        .service-item.selected { border-color: var(--cw-blue); background: #f0faff; }
         .btn-confirm { background: linear-gradient(135deg, var(--cw-blue), var(--cw-dark)); color: white; width: 100%; padding: 18px; border: none; border-radius: 14px; font-weight: 800; font-size: 16px; cursor: pointer; box-shadow: 0 8px 20px rgba(3,4,94,0.25); text-transform: uppercase; }
         footer { text-align: center; padding: 30px 10px; font-size: 10px; color: #bbb; letter-spacing: 1.5px; }
         .skeleton { height: 75px; background: #f5f5f5; border-radius: 14px; margin-bottom: 10px; animation: pulse 1.5s infinite; }
@@ -217,6 +112,7 @@
         <img src="logo.jpg" class="logo-bisnis" onerror="this.src='https://via.placeholder.com/100?text=LOGO'">
         <h1 style="margin:0; font-size:22px; font-weight:800; letter-spacing:1.5px;">AUTOCLEAN</h1>
         <div id="shop-status" class="status-badge">Checking...</div>
+        
     </div>
     <div class="slideshow-overlay"></div>
     <img src="foto1.jpg" class="bg-slide active">
@@ -229,16 +125,15 @@
 <div class="main-wrapper">
     <div class="info-card">
         <h3><i class="fas fa-sparkles"></i> Mengapa AutoClean?</h3>
-        <p>Layanan cuci premium dengan teknologi <strong>Snow Wash</strong>. Sampo khusus aman cat dan perlindungan anti jamur. Kendaraan kembali bersih, mengkilap, dan wangi!</p>
+        <p>Layanan cuci premium dengan teknologi <strong>Snow Wash</strong>. Sampo khusus aman cat dan perlindungan anti jamur.</p>
         <div class="mini-features">
-    <span><i class="fas fa-wifi"></i> Free WiFi</span>
-    <span><i class="fas fa-utensils"></i> Cafe & Resto</span>
-    <span><i class="fas fa-restroom"></i> Toilet Bersih</span>
-    <span><i class="fas fa-check-circle"></i> Gratis minuman</span>
-</div>
+            <span><i class="fas fa-wifi"></i> WiFi Gratis</span>
+            <span><i class="fas fa-utensils"></i> Cafe & Resto</span>
+            <span><i class="fas fa-restroom"></i> Toilet Bersih</span>
+            <span><i class="fas fa-gift"></i> Gratis Minuman</span>
+        </div>
     </div>
 
-  
     <div class="form-card">
         <div class="form-group">
             <label>Nama Pemilik</label>
@@ -247,10 +142,10 @@
         <div class="form-group">
             <label>Tipe Kendaraan</label>
             <select id="vehicle-type" onchange="resetAndFetch()">
-                <option value="motor-all"> Sepeda Motor</option>
-                <option value="mobil-small"> Mobil Small (Brio/Agya)</option>
-                <option value="mobil-medium"> Mobil Medium (Avanza/Xpander)</option>
-                <option value="mobil-large"> Mobil Large (DumpTruck/MiniBus)</option>
+                <option value="motor-all"> 🏍️ Sepeda Motor</option>
+                <option value="mobil-small">🚗 Mobil Small</option>
+                <option value="mobil-medium">🚙 Mobil Medium</option>
+                <option value="mobil-large">🚛 Mobil Large</option>
             </select>
         </div>
         <div class="form-group">
@@ -275,7 +170,7 @@
         <button class="btn-confirm" onclick="sendBooking()">Konfirmasi Booking</button>
     </div>
 
-<div class="gallery-card">
+    <div class="gallery-card">
         <h3><i class="fas fa-camera-retro" style="color: var(--cw-cyan);"></i> Galeri Hasil Cuci</h3>
         <div class="gallery-container">
             <img src="cuci1.jpg" class="gallery-slide active-gallery" onerror="this.src='https://via.placeholder.com/480x180?text=Hasil+Cuci+1'">
@@ -286,40 +181,31 @@
         </div>
     </div>
 
-<div class="location-card">
-    <h3><i class="fas fa-map-marker-alt" style="color: var(--cw-orange);"></i> Lokasi Workshop</h3>
-    <div class="address-box">
-        <i class="fas fa-directions"></i>
-        <div class="address-text">
-            <strong>AutoClean Carwash Premium</strong><br>
-            Jl. Raya Solo - Ngawi No.07, Grudo, Kec. Ngawi, Jawa Timur 63218
+    <div class="location-card">
+        <h3><i class="fas fa-map-marker-alt" style="color: var(--cw-orange);"></i> Lokasi Workshop</h3>
+        <div class="address-box">
+            <i class="fas fa-directions" style="color: var(--cw-orange);"></i>
+            <div>
+                <strong>AutoClean Carwash Premium</strong><br>
+                Jl. Raya Solo - Ngawi No.07, Grudo, Kec. Ngawi
+            </div>
         </div>
+        <div class="map-container">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3957.5321526685!2d111.4248972!3d-7.4054725!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7917844a0e3dd5%3A0x5c6d6a70f910f8c7!2sKing%20Gloss%20cuci%20mobil%20%26%20motor!5e0!3m2!1sid!2sid!4v1709440000000!5m2!1sid!2sid" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+        <a href="https://maps.google.com/?cid=6660096457398352071&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="btn-maps">
+            <i class="fas fa-location-arrow"></i> BUKA DI MAPS
+        </a>
     </div>
-
-    <div class="map-container">
-        <iframe 
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3957.5321526685!2d111.4248972!3d-7.4054725!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7917844a0e3dd5%3A0x5c6d6a70f910f8c7!2sKing%20Gloss%20cuci%20mobil%20%26%20motor!5e0!3m2!1sid!2sid!4v1709440000000!5m2!1sid!2sid" 
-            allowfullscreen="" 
-            loading="lazy">
-        </iframe>
-    </div>
-
-    <a href="https://maps.google.com/?cid=6660096457398352071&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" class="btn-maps">
-        <i class="fas fa-location-arrow"></i> BUKA DI APLIKASI MAPS
-    </a>
-</div>
-
-
 
 <div class="social-medias">
-    <a href="https://tiktok.com/@username_kamu" target="_blank"><i class="fab fa-tiktok"></i></a>
-    <a href="https://instagram.com/username_kamu" target="_blank"><i class="fab fa-instagram"></i></a>
-    <a href="https://facebook.com/username_kamu" target="_blank"><i class="fab fa-facebook"></i></a>
-</div>
-
-
+            <a href="https://tiktok.com/@autoclean" target="_blank"><i class="fab fa-tiktok"></i></a>
+            <a href="https://instagram.com/autoclean" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://facebook.com/autoclean" target="_blank"><i class="fab fa-facebook"></i></a>
+        </div>
+    
     <footer>
-        &copy; 2026 AUTOCLEAN CARWASH<br>Premium Vehicle Care & Detailing
+        © 2026 AUTOCLEAN CARWASH<br>Premium Vehicle Care & Detailing
     </footer>
 </div>
 
@@ -344,7 +230,9 @@ async function fetchData() {
     const vehicleValue = document.getElementById('vehicle-type').value.split('-');
     const filterKat = vehicleValue[0].toLowerCase().trim();
     const filterType = vehicleValue[1].toLowerCase().trim();
+    
     container.innerHTML = '<div class="skeleton"></div>';
+    
     try {
         const response = await fetch(CONFIG.CSV_URL);
         const csvString = await response.text();
@@ -356,23 +244,43 @@ async function fetchData() {
                 results.data.forEach(item => {
                     const itemKat = (item.kategori || "").toLowerCase().trim();
                     const itemType = (item.type || "").toLowerCase().trim();
+                    
                     if ((itemKat === filterKat || itemKat === "all") && (itemType === filterType || itemType === "all")) {
+                        
                         const hAsli = parseInt(item.harga) || 0;
                         const hPromo = parseInt(item.promo) || 0;
-                        const pTag = item.promo_tag || "";
+                        const labelPromo = item.promo_tag || ""; 
+                        const subLayanan = item.layanan || ""; 
+                        
                         const isPromo = hPromo > 0;
                         const finalPrice = isPromo ? hPromo : hAsli;
-                        const hargaCoretHTML = isPromo ? `<div style="text-decoration: line-through; color: #bbb; font-size: 11px; margin-bottom: -2px;">Rp ${hAsli.toLocaleString()}</div>` : '';
+
                         const card = document.createElement('div');
                         card.className = 'service-item';
                         card.onclick = () => selectService(card, `${item.nama} (Rp ${finalPrice.toLocaleString()})`);
-                        card.innerHTML = `<div style="flex:1; padding-right: 10px;"><div class="service-name">${item.nama}</div><div style="font-size:10px; color:#888;">${item.layanan || ''}</div>${pTag ? `<div class="promo-tag-badge">${pTag}</div>` : ''}</div><div class="price-box">${hargaCoretHTML}<div class="new-price">Rp ${finalPrice.toLocaleString()}</div></div>`;
+                        
+                        card.innerHTML = `
+                            <div style="flex:1; padding-right: 10px; display: flex; flex-direction: column; justify-content: center;">
+                                <div class="service-name" style="font-weight:700; color:var(--cw-dark);">${item.nama}</div>
+                                ${subLayanan ? `<div style="font-size:10px; color:#888; margin-top:2px;">${subLayanan}</div>` : ''}
+                            </div>
+                            <div class="price-box" style="text-align: right; min-width: 100px; display: flex; flex-direction: column; align-items: flex-end; justify-content: center;">
+                                ${isPromo ? `<div style="text-decoration: line-through; color: #bbb; font-size: 11px; margin-bottom: -2px;">Rp ${hAsli.toLocaleString()}</div>` : ''}
+                                <div class="new-price" style="font-weight: 800; color: var(--cw-blue); font-size: 15px;">
+                                    Rp ${finalPrice.toLocaleString()}
+                                </div>
+                                ${labelPromo ? `<div style="background:#e63946; color:white; font-size:9px; padding:2px 8px; border-radius:4px; font-weight:800; margin-top:4px; text-transform:uppercase; letter-spacing:0.5px;">${labelPromo}</div>` : ''}
+                            </div>
+                        `;
                         container.appendChild(card);
                     }
                 });
             }
         });
-    } catch (e) { console.error(e); }
+    } catch (e) { 
+        console.error(e); 
+        container.innerHTML = "<p style='font-size:12px; color:red; text-align:center;'>Gagal memuat menu.</p>";
+    }
 }
 
 function selectService(el, str) {
@@ -424,11 +332,10 @@ function initGallery() {
     setInterval(() => { currentGal = (currentGal + 1) % slides.length; updateGal(); }, 3500);
 }
 
-// Status Toko
 const hr = new Date().getHours();
 const elStatus = document.getElementById('shop-status');
-if(hr >= 8 && hr < 20) { elStatus.innerHTML = '<i class="fas fa-circle" style="font-size:8px;"></i> SEKARANG BUKA'; elStatus.className = "status-badge status-open"; }
-else { elStatus.innerHTML = '<i class="fas fa-circle" style="font-size:8px;"></i> SEKARANG TUTUP'; elStatus.className = "status-badge status-closed"; }
+if(hr >= 8 && hr < 20) { elStatus.innerHTML = '● SEKARANG BUKA'; elStatus.className = "status-badge status-open"; }
+else { elStatus.innerHTML = '● SEKARANG TUTUP'; elStatus.className = "status-badge status-closed"; }
 
 updateClock();
 fetchData();
