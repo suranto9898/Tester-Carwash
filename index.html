@@ -33,37 +33,13 @@
         .slideshow-container img.bg-slide.active { opacity: 0.5; }
         .slideshow-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to bottom, transparent, rgba(3,4,94,0.9)); z-index: 2; }
 
-.disclaimer-card {
-    background: #fff9f0; /* Oranye sangat muda agar kontras tapi lembut */
-    border: 1px solid #ffe8cc;
-    border-radius: 12px;
-    padding: 15px;
-    margin: 15px 0;
-    display: flex;
-    gap: 12px;
-    align-items: flex-start;
-}
-
-.disclaimer-card i {
-    color: var(--cw-orange);
-    font-size: 18px;
-    margin-top: 2px;
-}
-
-.disclaimer-text {
-    font-size: 11px;
-    line-height: 1.6;
-    color: #666;
-}
-
-.disclaimer-text strong {
-    color: var(--cw-dark);
-    display: block;
-    margin-bottom: 4px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-
+        .disclaimer-card {
+            background: #fff9f0; border: 1px solid #ffe8cc; border-radius: 12px;
+            padding: 15px; margin: 15px 0; display: flex; gap: 12px; align-items: flex-start;
+        }
+        .disclaimer-card i { color: var(--cw-orange); font-size: 18px; margin-top: 2px; }
+        .disclaimer-text { font-size: 11px; line-height: 1.6; color: #666; }
+        .disclaimer-text strong { color: var(--cw-dark); display: block; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
 
         /* Jam Melayang */
         #realtime-clock { 
@@ -114,7 +90,9 @@
         /* Form & Gallery */
         .form-group { margin-bottom: 18px; }
         label { display: block; font-size: 11px; font-weight: 800; margin-bottom: 8px; color: var(--cw-blue); text-transform: uppercase; }
-        input, select, .service-trigger { width: 100%; padding: 14px; border: 1.5px solid #eee; border-radius: 12px; font-size: 14px; box-sizing: border-box; background: #fdfdfd; outline: none; }
+        input, select, .service-trigger { width: 100%; padding: 14px; border: 1.5px solid #eee; border-radius: 12px; font-size: 14px; box-sizing: border-box; background: #fdfdfd; outline: none; transition: 0.3s; }
+        input:focus, select:focus, .service-trigger:hover { border-color: var(--cw-blue); }
+        
         .gallery-container { width: 100%; height: 180px; border-radius: 12px; overflow: hidden; position: relative; border: 2px solid #eee; }
         .gallery-slide { width: 100%; height: 100%; object-fit: cover; position: absolute; opacity: 0; transition: opacity 1s; z-index: 1; }
         .gallery-slide.active-gallery { opacity: 1; z-index: 2; }
@@ -125,15 +103,53 @@
         /* Maps */
         .address-box { display: flex; gap: 12px; background: #fffcf8; padding: 12px; border-radius: 12px; border: 1px dashed var(--cw-orange); font-size: 12px; }
         .map-container { width: 100%; height: 180px; border-radius: 15px; overflow: hidden; margin: 15px 0; border: 2px solid #eee; }
-        .btn-maps { display: inline-block; padding: 10px 15px; background: var(--cw-dark); color: white; text-decoration: none; border-radius: 8px; font-size: 11px; font-weight: 700; }
+        .btn-maps { display: inline-block; padding: 10px 15px; background: var(--cw-dark); color: white; text-decoration: none; border-radius: 8px; font-size: 11px; font-weight: 700; transition: 0.2s; }
+        .btn-maps:active { transform: scale(0.95); }
 
-        #service-list-container { display: none; gap: 10px; margin-top: 12px; max-height: 280px; overflow-y: auto; border-top: 1px dashed #eee; padding-top: 15px; }
-        .service-item { background: white; border: 1.2px solid #f0f0f0; border-radius: 14px; padding: 14px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; margin-bottom: 8px; }
+        /* ANIMASI DROPDOWN LAYANAN */
+        #service-list-container { 
+            display: flex; flex-direction: column; gap: 10px; 
+            max-height: 0; overflow: hidden; opacity: 0; padding: 0 5px;
+            transition: max-height 0.4s ease, opacity 0.4s ease, margin 0.4s ease;
+        }
+        #service-list-container.show {
+            max-height: 500px; opacity: 1; margin-top: 15px; 
+            overflow-y: auto; padding-top: 10px; border-top: 1px dashed #eee;
+        }
+        
+        #service-icon { transition: transform 0.3s ease; }
+        #service-icon.rotate { transform: rotate(180deg); }
+
+        .service-item { background: white; border: 1.2px solid #f0f0f0; border-radius: 14px; padding: 14px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; margin-bottom: 8px; transition: 0.2s; }
+        .service-item:active { transform: scale(0.98); }
         .service-item.selected { border-color: var(--cw-blue); background: #f0faff; }
-        .btn-confirm { background: linear-gradient(135deg, var(--cw-blue), var(--cw-dark)); color: white; width: 100%; padding: 18px; border: none; border-radius: 14px; font-weight: 800; font-size: 16px; cursor: pointer; box-shadow: 0 8px 20px rgba(3,4,94,0.25); text-transform: uppercase; }
+        
+        .btn-confirm { background: linear-gradient(135deg, var(--cw-blue), var(--cw-dark)); color: white; width: 100%; padding: 18px; border: none; border-radius: 14px; font-weight: 800; font-size: 16px; cursor: pointer; box-shadow: 0 8px 20px rgba(3,4,94,0.25); text-transform: uppercase; transition: 0.2s;}
+        .btn-confirm:active { transform: scale(0.98); }
+        
         footer { text-align: center; padding: 30px 10px; font-size: 10px; color: #bbb; letter-spacing: 1.5px; }
         .skeleton { height: 75px; background: #f5f5f5; border-radius: 14px; margin-bottom: 10px; animation: pulse 1.5s infinite; }
         @keyframes pulse { 50% { opacity: 0.4; } }
+
+        /* CUSTOM WARNING MODAL */
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.6); backdrop-filter: blur(5px);
+            display: none; align-items: center; justify-content: center;
+            z-index: 3000; opacity: 0; transition: opacity 0.3s ease;
+        }
+        .modal-overlay.show { opacity: 1; }
+        .modal-box {
+            background: rgba(255, 255, 255, 0.95); width: 85%; max-width: 320px;
+            border-radius: 24px; padding: 25px 20px; text-align: center;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+            transform: translateY(20px) scale(0.95); transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 2px solid var(--cw-blue);
+        }
+        .modal-overlay.show .modal-box { transform: translateY(0) scale(1); }
+        .modal-icon { width: 60px; height: 60px; background: #f0faff; color: var(--cw-blue); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 28px; margin: 0 auto 15px; }
+        .modal-title { font-size: 18px; font-weight: 800; color: var(--cw-dark); margin-bottom: 8px; }
+        .modal-text { font-size: 13px; color: #555; margin-bottom: 20px; line-height: 1.5; font-weight: 500;}
     </style>
 </head>
 <body>
@@ -175,9 +191,9 @@
             <label>Tipe Kendaraan</label>
             <select id="vehicle-type" onchange="resetAndFetch()">
                 <option value="motor-all"> 🏍️ Sepeda Motor</option>
-                <option value="mobil-small"> 🚗Mobil Small</option>
-                <option value="mobil-medium">🚙Mobil Medium</option>
-                <option value="mobil-large">🚛 Mobil Large</option>
+                <option value="mobil-small"> 🚗 Mobil Small</option>
+                <option value="mobil-medium"> 🚙 Mobil Medium</option>
+                <option value="mobil-large"> 🚛 Mobil Large</option>
             </select>
         </div>
         <div class="form-group">
@@ -186,9 +202,9 @@
         </div>
         <div class="form-group">
             <label>Pilih Layanan</label>
-            <div class="service-trigger" onclick="toggleServices()" style="display: flex; justify-content: space-between; align-items: center; cursor: pointer;">
+            <div class="service-trigger" onclick="toggleServices()">
                 <span id="selected-count">Lihat Menu Layanan...</span>
-                <i class="fas fa-chevron-down"></i>
+                <i id="service-icon" class="fas fa-chevron-down"></i>
             </div>
             <div id="service-list-container"></div>
         </div>
@@ -196,7 +212,7 @@
             <label>Waktu Datang</label>
             <div style="display: flex; gap: 10px;">
                 <input type="date" id="book-date">
-                <input type="time" id="book-time">
+                <input type="time" id="book-time" min="08:00" max="20:00">
             </div>
         </div>
         <button class="btn-confirm" onclick="sendBooking()">Konfirmasi Booking</button>
@@ -230,25 +246,34 @@
         </a>
     </div>
 
-<div class="social-medias">
-            <a href="https://tiktok.com/@autoclean" target="_blank"><i class="fab fa-tiktok"></i></a>
-            <a href="https://instagram.com/autoclean" target="_blank"><i class="fab fa-instagram"></i></a>
-            <a href="https://facebook.com/autoclean" target="_blank"><i class="fab fa-facebook"></i></a>
-        </div>
+    <div class="social-medias">
+        <a href="https://tiktok.com/@autoclean" target="_blank"><i class="fab fa-tiktok"></i></a>
+        <a href="https://instagram.com/autoclean" target="_blank"><i class="fab fa-instagram"></i></a>
+        <a href="https://facebook.com/autoclean" target="_blank"><i class="fab fa-facebook-f"></i></a>
+    </div>
     
     <div class="disclaimer-card">
-    <i class="fas fa-info-circle"></i>
-    <div class="disclaimer-text">
-        <strong>Ketentuan Booking Online</strong>
-        1. Datanglah 10 menit sebelum jadwal untuk verifikasi.<br>
-        2. Keterlambatan lebih dari 15 menit dianggap <b>Batal/Antrean Normal</b>.<br>
-        3. Harga final ditentukan setelah pengecekan kondisi fisik kendaraan oleh tim kami.
+        <i class="fas fa-info-circle"></i>
+        <div class="disclaimer-text">
+            <strong>Ketentuan Booking Online</strong>
+            1. Datanglah 10 menit sebelum jadwal untuk verifikasi.<br>
+            2. Keterlambatan lebih dari 15 menit dianggap <b>Batal/Antrean Normal</b>.<br>
+            3. Harga final ditentukan setelah pengecekan kondisi fisik kendaraan oleh tim kami.
+        </div>
     </div>
-</div>
 
     <footer>
-        � 2026 AUTOCLEAN CARWASH<br>Premium Vehicle Care & Detailing
+        © 2026 AUTOCLEAN CARWASH<br>Premium Vehicle Care & Detailing
     </footer>
+</div>
+
+<div class="modal-overlay" id="warningModal">
+    <div class="modal-box">
+        <div class="modal-icon"><i class="fas fa-exclamation-triangle"></i></div>
+        <h3 class="modal-title">Oops!</h3>
+        <p class="modal-text" id="warning-text">Lengkapi data Anda terlebih dahulu.</p>
+        <button class="btn-confirm" style="margin-top: 5px; padding: 12px; font-size: 14px;" onclick="closeWarningModal()">Mengerti</button>
+    </div>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
@@ -260,10 +285,16 @@ const CONFIG = {
 
 let selectedServices = [];
 
+// SET TANGGAL MINIMAL HARI INI SAAT HALAMAN DIMUAT
+document.addEventListener("DOMContentLoaded", function() {
+    const today = new Date().toISOString().split('T')[0];
+    document.getElementById('book-date').setAttribute('min', today);
+});
+
 function updateClock() {
     const now = new Date();
     const options = { weekday: 'long', day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit', second: '2-digit' };
-    document.getElementById('realtime-clock').innerText = now.toLocaleDateString('id-ID', options).replace(/\./g, ':');
+    document.getElementById('realtime-clock').innerText = now.toLocaleString('id-ID', options).replace(/\./g, ':');
 }
 setInterval(updateClock, 1000);
 
@@ -299,12 +330,13 @@ async function fetchData() {
 
                         const card = document.createElement('div');
                         card.className = 'service-item';
-                        // Ganti bagian card.onclick di dalam fetchData menjadi seperti ini:
-card.onclick = () => {
-    const detailLengkap = `*${item.nama}* ${subLayanan ? `(_${subLayanan}_)` : ''} ${labelPromo ? `[${labelPromo}]` : ''} - Rp ${finalPrice.toLocaleString()}`;
-    selectService(card, detailLengkap);
-};
-
+                        
+                        card.onclick = () => {
+                            const textLayanan = subLayanan ? ` (_${subLayanan}_)` : '';
+                            const textPromo = labelPromo ? ` [${labelPromo}]` : '';
+                            const detailLengkap = `*${item.nama}*${textLayanan}${textPromo} - Rp ${finalPrice.toLocaleString()}`;
+                            selectService(card, detailLengkap);
+                        };
                         
                         card.innerHTML = `
                             <div style="flex:1; padding-right: 10px; display: flex; flex-direction: column; justify-content: center;">
@@ -337,7 +369,31 @@ function selectService(el, str) {
 }
 
 function resetAndFetch() { selectedServices = []; document.getElementById('selected-count').innerText = "Lihat Menu Layanan..."; fetchData(); }
-function toggleServices() { const c = document.getElementById('service-list-container'); c.style.display = (c.style.display === "none" || c.style.display === "") ? "grid" : "none"; }
+
+function toggleServices() {
+    const c = document.getElementById('service-list-container');
+    const icon = document.getElementById('service-icon');
+    
+    c.classList.toggle('show');
+    if (c.classList.contains('show')) {
+        icon.classList.add('rotate');
+    } else {
+        icon.classList.remove('rotate');
+    }
+}
+
+function showWarningModal(msg) {
+    document.getElementById('warning-text').innerText = msg;
+    const modal = document.getElementById('warningModal');
+    modal.style.display = 'flex';
+    setTimeout(() => { modal.classList.add('show'); }, 10);
+}
+
+function closeWarningModal() {
+    const modal = document.getElementById('warningModal');
+    modal.classList.remove('show');
+    setTimeout(() => { modal.style.display = 'none'; }, 300);
+}
 
 function sendBooking() {
     const name = document.getElementById('cust-name').value;
@@ -346,12 +402,28 @@ function sendBooking() {
     const date = document.getElementById('book-date').value;
     const time = document.getElementById('book-time').value;
 
-    if(!name || !plat || !date || !time || selectedServices.length === 0) { 
-        alert("Mohon lengkapi data!"); 
+    if(!name || !plat || !date || !time) { 
+        showWarningModal("Mohon isi form data pemesanan secara lengkap."); 
         return; 
     }
+    if(selectedServices.length === 0) {
+        showWarningModal("Pilih minimal 1 Layanan yang ingin dipesan.");
+        return;
+    }
 
-    const daftarLayanan = selectedServices.join('\n');
+    // LOGIKA VALIDASI WAKTU
+    if (time < "08:00" || time > "20:00") {
+        showWarningModal("Jam operasional AutoClean adalah pukul 08:00 - 20:00 WIB. Mohon pilih waktu di rentang tersebut.");
+        return;
+    }
+
+    // LOGIKA VALIDASI TANGGAL & WAKTU (Mencegah booking di masa lalu pada hari yang sama)
+    const now = new Date();
+    const selectedDateTime = new Date(`${date}T${time}`);
+    if (selectedDateTime < now) {
+        showWarningModal("Waktu yang Anda pilih sudah lewat. Silakan pilih waktu yang valid.");
+        return;
+    }
 
     const pesan = `*BOOKING AUTOCLEAN*
 ---------------------------
@@ -361,16 +433,13 @@ function sendBooking() {
 *Jadwal:* ${date} @ ${time}
 
 *Layanan & Promo:*
-${selectedServices.join('\n')}
+- ${selectedServices.join('\n- ')}
 
 ---------------------------
 _NB: Datang tepat waktu. Terlambat 15 menit = Batal. Harga final dicek di lokasi._`;
 
-
     window.open(`https://wa.me/${CONFIG.WA_PHONE}?text=${encodeURIComponent(pesan)}`, '_blank');
 }
-
-
 
 // Slideshow Hero
 let current = 0;
@@ -403,8 +472,14 @@ function initGallery() {
 
 const hr = new Date().getHours();
 const elStatus = document.getElementById('shop-status');
-if(hr >= 8 && hr < 20) { elStatus.innerHTML = ' SEKARANG BUKA'; elStatus.className = "status-badge status-open"; }
-else { elStatus.innerHTML = ' SEKARANG TUTUP'; elStatus.className = "status-badge status-closed"; }
+if(hr >= 8 && hr < 20) { 
+    elStatus.innerHTML = '● SEKARANG BUKA'; 
+    elStatus.className = "status-badge status-open"; 
+}
+else { 
+    elStatus.innerHTML = '● SEKARANG TUTUP'; 
+    elStatus.className = "status-badge status-closed"; 
+}
 
 updateClock();
 fetchData();
